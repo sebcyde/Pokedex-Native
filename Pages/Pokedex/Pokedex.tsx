@@ -8,7 +8,7 @@ const Pokedex = ({ navigation }: any) => {
 			<Text>Pokedex</Text>
 			<Button
 				title="Go to Homescreen"
-				onPress={() => navigation.navigate('Homescreen')}
+				onPress={() => navigation.navigate('homescreen')}
 			/>
 		</View>
 	);
