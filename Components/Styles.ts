@@ -9,5 +9,6 @@ export const GenericStyles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		textAlign: 'center',
+		backgroundColor: 'lightblue',
 	},
 });
