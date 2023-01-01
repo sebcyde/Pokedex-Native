@@ -18,7 +18,6 @@ const CategoryTab = ({ BackgroundColor, Title }: Props) => {
 
 	const Styles = StyleSheet.create({
 		ShadowBox: {
-			height: 'fit-content',
 			justifyContent: 'center',
 			shadowColor: '#171717',
 			shadowOffset: { width: 2, height: 6 },
@@ -28,7 +27,6 @@ const CategoryTab = ({ BackgroundColor, Title }: Props) => {
 		},
 		CategoryContainer: {
 			backgroundColor: BackgroundColor,
-			height: 'fit-content',
 			width: '100%',
 			margin: 'auto',
 			marginBottom: 20,
