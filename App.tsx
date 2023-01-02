@@ -10,23 +10,26 @@ import Locations from './Pages/Locations/Locations';
 import Moves from './Pages/Moves/Moves';
 import Items from './Pages/Items/Items';
 import Typecharts from './Pages/Typecharts/Typecharts';
+import PokemonDetails from './Pages/Pokedex/PokemonDetails';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator>
-				<Stack.Screen
-					name="homescreen"
-					component={Homescreen}
-					options={{ title: 'Homescreen' }}
-				/>
-				<Stack.Screen
-					name="pokedex"
-					component={Pokedex}
-					options={{ title: 'Pokedex' }}
-				/>
+			<Stack.Navigator
+				screenOptions={{
+					headerBackTitleVisible: false,
+					title: '',
+					headerStyle: {
+						backgroundColor: 'whitesmoke',
+					},
+					headerTintColor: 'black',
+				}}
+			>
+				<Stack.Screen name="homescreen" component={Homescreen} />
+				<Stack.Screen name="pokedex" component={Pokedex} />
+				<Stack.Screen name="pokemondetails" component={PokemonDetails} />
 				<Stack.Screen
 					name="abilities"
 					component={Abilities}

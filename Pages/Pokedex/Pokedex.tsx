@@ -1,4 +1,5 @@
 import {
+	ActivityIndicator,
 	Image,
 	ImageBackground,
 	ScrollView,
@@ -58,9 +59,9 @@ const Pokedex = ({ navigation }: any) => {
 	}, []);
 
 	return (
-		<View>
+		<View style={Loading || !PokemonData ? styles.LoadingScreen : ''}>
 			{Loading || !PokemonData ? (
-				<Text>Loading Pokemon...</Text>
+				<ActivityIndicator size="large" color="#264653" />
 			) : (
 				<ScrollView style={styles.PokedexPageContainer}>
 					<View style={styles.PokedexContainer}>
@@ -91,7 +92,15 @@ const Pokedex = ({ navigation }: any) => {
 							};
 
 							return (
-								<TouchableOpacity style={ShadowBox} key={Pokemon.id}>
+								<TouchableOpacity
+									style={ShadowBox}
+									key={Pokemon.id}
+									onPress={() =>
+										navigation.navigate('pokemondetails', {
+											PokemonDetails: Pokemon,
+										})
+									}
+								>
 									<View style={PokemonContainer}>
 										<View style={styles.DetailsContainer}>
 											<Text style={styles.PokemonName}>{Pokemon.name}</Text>
@@ -127,6 +136,10 @@ const Pokedex = ({ navigation }: any) => {
 };
 
 const styles = StyleSheet.create({
+	LoadingScreen: {
+		flex: 1,
+		justifyContent: 'center',
+	},
 	PokedexPageContainer: {
 		padding: 20,
 		paddingTop: 5,
