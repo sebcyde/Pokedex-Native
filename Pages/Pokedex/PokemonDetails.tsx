@@ -1,9 +1,22 @@
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import {
+	ActivityIndicator,
+	ScrollView,
+	StatusBar,
+	StyleSheet,
+	Image,
+	View,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
+import DetailsTopSection from '../../Components/Pokedex/DetailsTopSection';
+import DetailsBottomSection from '../../Components/Pokedex/DetailsBottomSection';
+import { TypeColors } from './Pokedex';
 
 const PokemonDetails = (PokemonDetails: any) => {
 	const [Loading, setLoading] = useState(true);
 	const Pokemon = PokemonDetails.route.params.PokemonDetails;
+
+	const SBColor =
+		TypeColors[Pokemon.types[0].type.name as keyof typeof TypeColors];
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -12,15 +25,19 @@ const PokemonDetails = (PokemonDetails: any) => {
 	}, []);
 
 	return (
-		<View style={Loading ? styles.LoadingScreen : ''}>
+		<>
+			<StatusBar backgroundColor={SBColor} barStyle="dark-content" />
 			{Loading ? (
-				<ActivityIndicator size="large" color="#264653" />
-			) : (
-				<View>
-					<Text style={styles.PokemonName}>{JSON.stringify(Pokemon.name)}</Text>
+				<View style={styles.LoadingScreen}>
+					<ActivityIndicator size="large" color="#264653" />
 				</View>
+			) : (
+				<ScrollView>
+					<DetailsTopSection Pokemon={Pokemon} />
+					<DetailsBottomSection Pokemon={Pokemon} />
+				</ScrollView>
 			)}
-		</View>
+		</>
 	);
 };
 
@@ -30,8 +47,5 @@ const styles = StyleSheet.create({
 	LoadingScreen: {
 		flex: 1,
 		justifyContent: 'center',
-	},
-	PokemonName: {
-		color: 'black',
 	},
 });

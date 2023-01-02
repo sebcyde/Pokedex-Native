@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Homescreen from './Pages/Homescreen/Homescreen';
@@ -17,12 +16,13 @@ const Stack = createNativeStackNavigator();
 export default function App() {
 	return (
 		<NavigationContainer>
+			<StatusBar backgroundColor="#61dafb" barStyle="dark-content" />
 			<Stack.Navigator
 				screenOptions={{
 					headerBackTitleVisible: false,
 					title: '',
 					headerStyle: {
-						backgroundColor: 'whitesmoke',
+						backgroundColor: 'transparent',
 					},
 					headerTintColor: 'black',
 				}}

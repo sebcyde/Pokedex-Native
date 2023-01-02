@@ -3,6 +3,7 @@ import {
 	Image,
 	ImageBackground,
 	ScrollView,
+	StatusBar,
 	StyleSheet,
 	Text,
 	TouchableOpacity,
@@ -12,30 +13,30 @@ import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 
+export const TypeColors = {
+	normal: '#A8A878',
+	fire: '#F08030',
+	water: '#6890F0',
+	grass: '#78C850',
+	electric: '#F8D030',
+	ice: '#98D8D8',
+	fighting: '#C03028',
+	poison: '#A040A0',
+	ground: '#E0C068',
+	flying: '#A890F0',
+	psychic: '#F85888',
+	bug: '#A8B820',
+	rock: '#B8A038',
+	ghost: '#705898',
+	dark: '#705848',
+	dragon: '#7038F8',
+	steel: '#B8B8D0',
+	fairy: '#EAB1B7',
+};
+
 const Pokedex = ({ navigation }: any) => {
 	const [Loading, setLoading] = useState(true);
 	const [PokemonData, setPokemonData] = useState<any[]>([]);
-
-	const TypeColors = {
-		normal: '#A8A878',
-		fire: '#F08030',
-		water: '#6890F0',
-		grass: '#78C850',
-		electric: '#F8D030',
-		ice: '#98D8D8',
-		fighting: '#C03028',
-		poison: '#A040A0',
-		ground: '#E0C068',
-		flying: '#A890F0',
-		psychic: '#F85888',
-		bug: '#A8B820',
-		rock: '#B8A038',
-		ghost: '#705898',
-		dark: '#705848',
-		dragon: '#7038F8',
-		steel: '#B8B8D0',
-		fairy: '#EAB1B7',
-	};
 
 	const BackgroundPokeball = {
 		uri: 'https://icon-library.com/images/pokeball-icon-transparent/pokeball-icon-transparent-5.jpg',
@@ -59,7 +60,8 @@ const Pokedex = ({ navigation }: any) => {
 	}, []);
 
 	return (
-		<View style={Loading || !PokemonData ? styles.LoadingScreen : ''}>
+		<View style={Loading || !PokemonData ? styles.LoadingScreen : null}>
+			<StatusBar backgroundColor="#61dafb" barStyle="dark-content" />
 			{Loading || !PokemonData ? (
 				<ActivityIndicator size="large" color="#264653" />
 			) : (
