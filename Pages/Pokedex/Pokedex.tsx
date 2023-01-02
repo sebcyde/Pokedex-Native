@@ -4,6 +4,7 @@ import {
 	ScrollView,
 	StyleSheet,
 	Text,
+	TouchableOpacity,
 	View,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -44,7 +45,7 @@ const Pokedex = ({ navigation }: any) => {
 			'https://pokeapi.co/api/v2/pokemon/?limit=1000000'
 		);
 		const Data = await Promise.all(
-			RawData.data.results.map(async (Pokemon: any) => {
+			RawData.data.results.slice(0, 100).map(async (Pokemon: any) => {
 				const Response = await axios.get(Pokemon.url);
 				return Response.data;
 			})
@@ -62,13 +63,12 @@ const Pokedex = ({ navigation }: any) => {
 				<Text>Loading Pokemon...</Text>
 			) : (
 				<ScrollView style={styles.PokedexPageContainer}>
-					<Text style={styles.PokedexHeader}>Pokedex</Text>
 					<View style={styles.PokedexContainer}>
 						{PokemonData.map((Pokemon: any) => {
 							const Type: string = Pokemon.types[0].type.name;
 
 							const ShadowBox = {
-								height: 100,
+								height: 135,
 								width: '48%',
 								borderRadius: 15,
 								marginBottom: 20,
@@ -80,7 +80,7 @@ const Pokedex = ({ navigation }: any) => {
 
 							const PokemonContainer = {
 								backgroundColor: TypeColors[Type as keyof typeof TypeColors],
-								height: 100,
+								height: 135,
 								width: '100%',
 								borderRadius: 15,
 								marginBottom: 20,
@@ -91,7 +91,7 @@ const Pokedex = ({ navigation }: any) => {
 							};
 
 							return (
-								<View style={ShadowBox}>
+								<TouchableOpacity style={ShadowBox} key={Pokemon.id}>
 									<View style={PokemonContainer}>
 										<View style={styles.DetailsContainer}>
 											<Text style={styles.PokemonName}>{Pokemon.name}</Text>
@@ -116,7 +116,7 @@ const Pokedex = ({ navigation }: any) => {
 											/>
 										</View>
 									</View>
-								</View>
+								</TouchableOpacity>
 							);
 						})}
 					</View>
@@ -129,6 +129,7 @@ const Pokedex = ({ navigation }: any) => {
 const styles = StyleSheet.create({
 	PokedexPageContainer: {
 		padding: 20,
+		paddingTop: 5,
 	},
 	PokedexHeader: {
 		fontFamily: 'Avenir-Black',
@@ -155,11 +156,12 @@ const styles = StyleSheet.create({
 		textTransform: 'capitalize',
 		fontSize: 18,
 		flexWrap: 'nowrap',
+		bottom: 5,
 	},
 	ImageContainer: {
 		position: 'absolute',
-		right: '3%',
-		top: '12%',
+		right: '4%',
+		top: '20%',
 		justifyContent: 'center',
 		alignItems: 'center',
 		width: '50%',
@@ -171,26 +173,35 @@ const styles = StyleSheet.create({
 		height: 120,
 		width: 120,
 		opacity: 1,
+		right: 4,
+		bottom: 2,
 	},
 	BackgroundImage: {
 		zIndex: 1,
-		width: 95,
-		height: 95,
+		width: 150,
+		height: 150,
 		justifyContent: 'center',
 		marginLeft: 'auto',
 		marginRight: 'auto',
-		opacity: 0.3,
+		opacity: 0.2,
 		position: 'absolute',
-		left: 15,
-		top: 10,
+		left: -10,
+		top: 5,
 		transform: [{ rotate: '-40deg' }],
 	},
 	TypeContainer: {},
 	TypeName: {
+		top: 2,
+		backgroundColor: 'rgba(250,250,250,0.3)',
+		alignSelf: 'flex-start',
+		padding: 5,
+		margin: 2,
+		borderRadius: 7,
 		fontFamily: 'Avenir-Black',
 		color: 'white',
 		textTransform: 'capitalize',
 		fontSize: 13,
+		overflow: 'hidden',
 	},
 });
 
